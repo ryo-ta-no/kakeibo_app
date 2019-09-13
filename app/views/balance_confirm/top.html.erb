@@ -1,0 +1,6 @@
+<h2>月次収支確認</h2>
+
+<%= form_tag({controller: :balance_confirm, action: :show}, {method: :post}) do %>
+  <input type="month" name="year_month">
+  <input type="submit">
+<% end %>
