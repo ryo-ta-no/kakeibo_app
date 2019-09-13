@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get "balance_confirm" => "balance_confirm#top"
   post "balance_confirm/show(/:name)" => "balance_confirm#show"
+  post "blance_confirm/show_year(/:name)" => "balance_confirm#show_year"
 
   resources :incomes
   resources :fixedcosts
