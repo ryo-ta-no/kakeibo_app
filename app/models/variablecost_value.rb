@@ -1,0 +1,2 @@
+class VariablecostValue < ApplicationRecord
+end
