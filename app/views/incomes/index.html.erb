@@ -4,7 +4,14 @@
 
   <div class = "title"><%= @page_title %></div>
 
-  <%= link_to "収入科目の新規登録", :new_income, class: "add-new" %>
+  <div class = "link-btn">
+    <div class = "add-new">
+      <%= link_to "収入科目の新規登録", :new_income %>
+    </div>
+    <div class = "top-page">
+      <%= link_to "トップページへ戻る", :root %>
+    </div>
+  </div>
 
   <% if @incomes.present? %>
 

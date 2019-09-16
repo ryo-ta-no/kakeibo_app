@@ -1,5 +1,9 @@
-<h2>収入科目登録</h2>
-<%= form_for @income do |form| %>
-	<%= render "form", form: form %>
-	<div><%= form.submit %></div>
-<% end %>
+<div class = "main">
+
+  <div class = "title">収入科目登録</div>
+  <%= form_for @income do |form| %>
+    <%= render "form", form: form %>
+    <div><%= form.submit "作成", class: "btn" %></div>
+  <% end %>
+
+</div>
