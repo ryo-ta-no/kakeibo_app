@@ -1,6 +1,9 @@
 class IncomesController < ApplicationController
+
+  before_action :set_current_user
+
   def index
-    @incomes = Income.order(created_at: :asc)
+    @incomes = Income.where(user: current_user).order(created_at: :asc)
   end
 
   def show
@@ -16,7 +19,7 @@ class IncomesController < ApplicationController
   end
 
   def create
-    @income = Income.new(params[:income])
+    @income = Income.new(income_params)
     if @income.save
       redirect_to @income, notice: "収入科目を登録しました"
     else
@@ -36,14 +39,22 @@ class IncomesController < ApplicationController
 
   def destroy
     @income = Income.find(params[:id])
-    @income.destroy
-    redirect_to :incomes, notice: "科目を削除しました。"
+    if @income.user_id == current_user.id
+      @income.destroy
+      redirect_to :incomes, notice: "科目を削除しました。"
+    end
   end
 
 
-  # private
-  # def income_params
-  #   params.require(:income).permit(:name, :description).merge()
-  # end
+  def set_current_user
+    # @current_user = User.find_by(id: session[:user_id])
+    @current_user = @current_user || User.find_by(id: session[:user_id])
+  end
+
+
+  private
+  def income_params
+    params.require(:income).permit(:name, :description).merge(user_id: current_user.id)
+  end
 
 end
