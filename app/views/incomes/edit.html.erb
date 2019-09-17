@@ -1,5 +1,7 @@
 <h2>収入科目編集</h2>
 <%= form_for @income do |form| %>
 	<%= render "form", form: form %>
-	<div><%= form.submit %></div>
+	<div class = "edit-btn">
+    <%= form.submit "変更する", class: "btn" %>
+  </div>
 <% end %>

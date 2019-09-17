@@ -1,8 +1,9 @@
 @import "reset";
 @import "top";
-@import "./incomes/_index";
-@import "./incomes/_new";
-@import "./incomes/_form";
-@import "./user/_signup";
-@import "_flash";
-@import "./incomes/_show";
+@import "./incomes/index";
+@import "./incomes/new";
+@import "./incomes/form";
+@import "./user/signup";
+@import "flash";
+@import "./incomes/show";
+@import "./incomes/edit";
