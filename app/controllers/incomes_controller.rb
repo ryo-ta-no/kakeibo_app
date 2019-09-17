@@ -1,7 +1,5 @@
 class IncomesController < ApplicationController
 
-  before_action :set_current_user
-
   def index
     @incomes = Income.where(user: current_user).order(created_at: :asc)
   end
@@ -43,12 +41,6 @@ class IncomesController < ApplicationController
       @income.destroy
       redirect_to :incomes, notice: "科目を削除しました。"
     end
-  end
-
-
-  def set_current_user
-    # @current_user = User.find_by(id: session[:user_id])
-    @current_user = @current_user || User.find_by(id: session[:user_id])
   end
 
 

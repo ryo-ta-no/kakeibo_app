@@ -29,11 +29,9 @@
           <td><%= income.name %></td>
           <td><%= income.description %></td>
           <td>
-          <% if user_signed_in? && income.user_id == current_user.id %>
             <%= link_to "編集", [:edit, income] %>
             <%= link_to "削除", income, method: :delete,
                 data: { confirm: "本当に削除しますか？"} %>
-          <% end %>
           </td>
         </tr>
       <% end %>
@@ -43,4 +41,5 @@
   <% else %>
     <p>登録されている収入科目がありません。</p>
   <% end %>
+
 </div>

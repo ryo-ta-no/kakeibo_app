@@ -1,5 +1,7 @@
 <h2>変動費科目編集</h2>
 <%= form_for @variablecost do |form| %>
   <%= render "form", form: form %>
-  <div><%= form.submit %></div>
+  <div class = "edit-btn">
+    <%= form.submit "変更する", class: "btn" %>
+  </div>
 <% end %>

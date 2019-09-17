@@ -1,6 +1,7 @@
 class VariablecostsController < ApplicationController
+
   def index
-    @variablecosts = Variablecost.order(created_at: :asc)
+    @variablecosts = Variablecost.where(user: current_user).order(created_at: :asc)
   end
 
   def show
@@ -16,13 +17,12 @@ class VariablecostsController < ApplicationController
   end
 
   def create
-    @variablecost = Variablecost.new(params[:variablecost])
+    @variablecost = Variablecost.new(variablecost_params)
     if @variablecost.save
       redirect_to @variablecost, notice: "変動費科目を登録しました"
     else
       render "new"
     end
-
   end
 
   def update
@@ -37,8 +37,16 @@ class VariablecostsController < ApplicationController
 
   def destroy
     @variablecost = Variablecost.find(params[:id])
-    @variablecost.destroy
-    redirect_to :variablecosts, notice: "科目を削除しました。"
+    if @variablecost.user_id == current_user.id
+      @variablecost.destroy
+      redirect_to :variablecosts, notice: "科目を削除しました。"
+    end
+  end
+
+
+  private
+  def variablecost_params
+    params.require(:variablecost).permit(:name, :description).merge(user_id: current_user.id)
   end
 
 end

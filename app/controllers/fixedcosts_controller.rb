@@ -1,6 +1,7 @@
 class FixedcostsController < ApplicationController
+
   def index
-    @fixedcosts = Fixedcost.order(created_at: :asc)
+    @fixedcosts = Fixedcost.where(user: current_user).order(created_at: :asc)
   end
 
   def show
@@ -16,7 +17,7 @@ class FixedcostsController < ApplicationController
   end
 
   def create
-    @fixedcost = Fixedcost.new(params[:fixedcost])
+    @fixedcost = Fixedcost.new(fixedcost_params)
     if @fixedcost.save
       redirect_to @fixedcost, notice: "固定費科目を登録しました"
     else
@@ -36,8 +37,16 @@ class FixedcostsController < ApplicationController
 
   def destroy
     @fixedcost = Fixedcost.find(params[:id])
-    @fixedcost.destroy
-    redirect_to :fixedcosts, notice: "科目を削除しました。"
+    if @fixedcost.user_id == current_user.id
+      @fixedcost.destroy
+      redirect_to :fixedcosts, notice: "科目を削除しました。"
+    end
+  end
+
+
+  private
+  def fixedcost_params
+    params.require(:fixedcost).permit(:name, :description).merge(user_id: current_user.id)
   end
 
 end

@@ -1,32 +1,45 @@
-<% @page_title = "固定費科目一覧" %>
-<h2><%= @page_title %></h2>
+<div class = "main">
 
-<%= link_to "固定費科目の新規登録", :new_fixedcost %>
+  <% @page_title = "固定費科目一覧" %>
 
-<% if @fixedcosts.present? %>
-<table>
-  <thead>
-    <tr>
-      <th>科目名</th>
-      <th>備考</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @fixedcosts.each do |fixedcost| %>
+  <div class = "title"><%= @page_title %></div>
+
+  <div class = "link-btn">
+    <div class = "add-new">
+      <%= link_to "固定費科目の新規登録", :new_fixedcost %>
+    </div>
+    <div class = "top-page">
+      <%= link_to "トップページへ戻る", :root %>
+    </div>
+  </div>
+
+  <% if @fixedcosts.present? %>
+
+  <table>
+    <thead>
       <tr>
-        <td><%= fixedcost.name %></td>
-        <td><%= fixedcost.description %></td>
-        <td>
-        <%= link_to "編集", [:edit, fixedcost] %>
-        <%= link_to "削除", fixedcost, method: :delete,
-          data: { confirm: "本当に削除しますか？"} %>
-        </td>
+        <th>科目名</th>
+        <th>備考</th>
+        <th>操作</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @fixedcosts.each do |fixedcost| %>
+        <tr>
+          <td><%= fixedcost.name %></td>
+          <td><%= fixedcost.description %></td>
+          <td>
+            <%= link_to "編集", [:edit, fixedcost] %>
+            <%= link_to "削除", fixedcost, method: :delete,
+              data: { confirm: "本当に削除しますか？"} %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<% else %>
-  <p>登録されている固定費科目がありません。</p>
-<% end %>
+  <% else %>
+    <p>登録されている固定費科目がありません。</p>
+  <% end %>
+
+</div>
